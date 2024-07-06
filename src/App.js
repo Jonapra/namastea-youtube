@@ -1,18 +1,11 @@
 import "./App.css";
+import Header from "./components/Header/Header";
+import Body from "./components/Body/Body";
 function App() {
   return (
     <div className="App">
-      <h1 className="text-blue-700 text-3xl text-center">This is a react app</h1>
-      {/** Planing
-          Head
-        * Body
-        * Sidebar
-        * MenuItems
-        * MainContainer
-        ⭑ ButtonsList
-        VideoContainer
-        VideoCard
-        */}
+        <Header />
+        <Body />
     </div>
   );
 }
