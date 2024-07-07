@@ -13,7 +13,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <div className="fixed top-14 left-0 h-full w-64 bg-white overflow-y-auto transition-all duration-300 transform -translate-x-full sm:translate-x-0 z-30">
+    <div className="fixed border-2 border-red-800 top-14 left-0 h-full w-56 bg-white overflow-y-auto transition-all duration-300 transform -translate-x-full sm:translate-x-0 z-30">
       <div className="px-3 py-4">
         <nav>
           <ul>
@@ -62,7 +62,7 @@ const Sidebar = () => {
             <li className="mb-1">
               <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
                 <VideoIcon className="w-5 h-5 mr-3" />
-                <span>Your videos</span>
+                <span className='pl-2'>Your videos</span>
               </a>
             </li>
             <li className="mb-1">
