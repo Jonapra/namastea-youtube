@@ -1,24 +1,37 @@
 import React from 'react';
+import { HomeIcon, ShortsIcon, SubscriptionsIcon, YouIcon } from '../../../utils/Icons';
 
 const SideMenu = () => {
   return (
-    <div className="flex flex-col items-center h-screen p-4 space-y-6 bg-white shadow-lg w-16 md:w-48">
-      <div className="flex flex-col items-center space-y-1">
-        <img src="home-icon.png" alt="Home" className="w-8 h-8 md:w-10 md:h-10" />
-        <span className="hidden md:block text-sm text-gray-700">Home</span>
-      </div>
-      <div className="flex flex-col items-center space-y-1">
-        <img src="shorts-icon.png" alt="Shorts" className="w-8 h-8 md:w-10 md:h-10" />
-        <span className="hidden md:block text-sm text-gray-700">Shorts</span>
-      </div>
-      <div className="flex flex-col items-center space-y-1">
-        <img src="subscriptions-icon.png" alt="Subscriptions" className="w-8 h-8 md:w-10 md:h-10" />
-        <span className="hidden md:block text-sm text-gray-700">Subscriptions</span>
-      </div>
-      <div className="flex flex-col items-center space-y-1">
-        <img src="you-icon.png" alt="You" className="w-8 h-8 md:w-10 md:h-10" />
-        <span className="hidden md:block text-sm text-gray-700">You</span>
-      </div>
+    <div className="w-[72px] bg-[#0F0F0F] h-screen flex flex-col items-center mt-3 pt-4 space-y-6">
+      <nav>
+        <ul className="flex flex-col items-center space-y-5">
+          <li>
+            <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
+              <HomeIcon className="w-6 h-6" />
+              <span className="text-[10px] mt-1">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
+              <ShortsIcon className="w-6 h-6" />
+              <span className="text-[10px] mt-1">Shorts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
+              <SubscriptionsIcon className="w-6 h-6" />
+              <span className="text-[10px] mt-1">Subs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
+              <YouIcon className="w-6 h-6" />
+              <span className="text-[10px] mt-1">You</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }

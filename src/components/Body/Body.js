@@ -10,14 +10,13 @@ const Body = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   // console.log('This is active sidebar', activeSidebar);
   return (
-    <div className='body-container flex border-2 border-gray-300'>
+    <div className='body-container flex border-2 border-gray-300 bg-[#0F0F0F]'>
       {/* Sidebar */}
       <div className='sidebarSection '>
-        {isSidebarOpen? <Sidebar /> : null}  
+        {isSidebarOpen? <Sidebar /> : <SideMenu/>}  
       </div>
       {/* Main video body section */}
-      <div className='videoSection mt-6 hidden '>
-        <SideMenu />
+      <div className='videoSection mt-5  border-2 border-red-700 max-w[1482px] w-[100%]'>
         <Video />
       </div>
     </div>
