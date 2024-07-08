@@ -12,11 +12,11 @@ const Body = () => {
   return (
     <div className='body-container flex border-2 border-gray-300 bg-[#0F0F0F]'>
       {/* Sidebar */}
-      <div className='sidebarSection '>
+      <div className='sidebarSection '> 
         {isSidebarOpen? <Sidebar /> : <SideMenu/>}  
       </div>
       {/* Main video body section */}
-      <div className='videoSection mt-5  border-2 border-red-700 max-w[1482px] w-[100%]'>
+      <div className='videoSection mt-5  border-2 border-red-700  w-[100%]'>
         <Video />
       </div>
     </div>
