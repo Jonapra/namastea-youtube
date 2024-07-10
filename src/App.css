@@ -34,4 +34,7 @@
   scrollbar-width: none;
 }
 
-  
+/* Font color white */
+.white{
+  color: white;
+}

@@ -7,7 +7,7 @@ const Navbar = () => {
 
   return (
     <div className='nav-container'>
-      <nav className="flex items-center justify-between bg-black px-4 py-2">
+      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between bg-black px-4 py-2 z-50">
         <div className="flex items-center">
           <button className="p-2 hover:bg-gray-700 rounded-full" onClick={toggleSidebar}>
             <MenuIcon className="text-white" />
