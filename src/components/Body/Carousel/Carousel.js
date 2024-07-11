@@ -34,9 +34,9 @@ const NavigationBar = () => {
 
   return (
     <div 
-      className="relative bg-[#0f0f0f] flex items-center w-[100%] navigation-bar "
+      className="bg-[#010000] flex items-center w-[100%] navigation-bar fixed py-4 "
       style={{ 
-        maxWidth: isSidebarOpen ? '1380px' : '1460px'
+        maxWidth: isSidebarOpen ? '1390px' : '1500px'
       }}
     >
       <button

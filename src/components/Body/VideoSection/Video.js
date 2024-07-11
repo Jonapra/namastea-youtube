@@ -50,29 +50,30 @@ const Video = ({ info }) => {
   const { isSidebarOpen } = useContext(SidebarContext);
 
   return info?.length <= 0 ? null : (
-    <div className={`text-white  py-5 rounded-lg hover:bg-gray-900 transition-colors duration-300 cursor-pointer 
+    <div className={`text-white   rounded-lg hover:bg-gray-900 transition-colors duration-300 cursor-pointer 
       ${isSidebarOpen ? 'w-full sm:w-[320px]' : 'w-full sm:w-[354px]'}`}>
       <div className='flex flex-col space-y-2'>
-        <div className='w-full'>
+        <div className='w-full h-48'>
           <img 
             alt='thumbnail' 
-            src={thumbnails?.medium?.url} 
-            className='w-full rounded-lg'
+            src={thumbnails?.high?.url} 
+            className='w-full h-full rounded-lg object-cover'
           />
         </div>
         <div className='px-2'>
           <h4 className='text-lg font-semibold mb-1 line-clamp-2'>
             {truncateTitle(title, 10)}
           </h4>
+          <p className='text-sm text-gray-400 mt-1'>{channelTitle}</p>
           <div className='text-base text-gray-400'>
             <span>{formatViews(viewCount)} views</span>
             <span className='mx-1'>•</span>
             <span>{getTimeDifference(publishedAt)}</span>
           </div>
-          <p className='text-sm text-gray-400 mt-1'>{channelTitle}</p>
         </div>
       </div>
     </div>
+
   );
 };
 

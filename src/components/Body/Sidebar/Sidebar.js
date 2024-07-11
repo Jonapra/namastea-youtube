@@ -24,9 +24,9 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`fixed top-14 left-0 h-[calc(100vh-56px)] bg-[#0F0F0F] text-white transition-all duration-300 z-40 
-                  ${isSidebarOpen ? 'w-48' : 'w-0'} 
-                  sm:w-48 sm:static overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 custom-scrollbar`}
+      className={`fixed top-14  h-[calc(100vh-56px)] bg-[#0F0F0F] text-white transition-all duration-300 z-40 
+                  
+                  sm:w-44 sm:static overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 custom-scrollbar`}
     >
       <div className="px-3 py-4">
         <nav>

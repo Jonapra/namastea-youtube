@@ -25,13 +25,15 @@
   position: relative;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Firefox */
-.scrollbar-hide {
-  scrollbar-width: none;
+/* Add this to your global CSS file */
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Font color white */

@@ -26,19 +26,20 @@ const Body = () => {
   const { isSidebarOpen } = useContext(SidebarContext);
   // console.log('This is active sidebar', activeSidebar);
   return (
-    <div className='body-container flex border-2 border-gray-300 bg-[#0F0F0F] mt-12'>
+    <div className='body-container flex  bg-[#010000] mt-12'>
       {/* Sidebar */}
-      {/* Try here fixed 1st  */}
-      <div className='sidebarSection '> 
-        {isSidebarOpen? <Sidebar /> : <SideMenu/>}  
+      <div className='sidebarSection fixed hidden lg:block'>
+        {isSidebarOpen ? <Sidebar /> : <SideMenu />}
       </div>
-
       {/* Main video body section */}
-      <div className='videoSection   w-[100%] h-full bg-[#0F0F0F] flex flex-wrap justify-between mt-6 px-4 '>
-        {/* <Carousel /> */}
-        {
-          videos.map(videos=><Video info={videos} key={videos.id} />)
-        }
+      {/* Added margin-left when sidebar is open */}
+      <div className={`videoSection w-full h-full bg-[#010000] ${isSidebarOpen ? 'lg:ml-44' : 'lg:ml-14'}`}>
+        <Carousel />
+       <div className='pt-20 flex flex-wrap justify-between gap-4 px-4'>
+          {
+            videos.map(video => <Video info={video} key={video.id} />)
+          }
+       </div>
       </div>
     </div>
   )
