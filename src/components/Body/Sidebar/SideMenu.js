@@ -1,5 +1,6 @@
 import React from 'react';
 import { HomeIcon, ShortsIcon, SubscriptionsIcon, YouIcon } from '../../../utils/Icons';
+import { Link } from'react-router-dom';
 
 const SideMenu = () => {
   return (
@@ -8,10 +9,10 @@ const SideMenu = () => {
       <nav>
         <ul className="flex flex-col items-center space-y-5">
           <li>
-            <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
+            <Link to={'/'} className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">
               <HomeIcon className="w-6 h-6" />
               <span className="text-[10px] mt-1">Home</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" className="flex flex-col items-center text-center text-white hover:bg-gray-800 rounded-lg p-2">

@@ -50,14 +50,14 @@ const Video = ({ info }) => {
   const { isSidebarOpen } = useContext(SidebarContext);
 
   return info?.length <= 0 ? null : (
-    <div className={`text-white   rounded-lg hover:bg-gray-900 transition-colors duration-300 cursor-pointer 
+    <div className={`text-white rounded-lg hover:bg-gray-900 transition-colors duration-300 cursor-pointer 
       ${isSidebarOpen ? 'w-full sm:w-[320px]' : 'w-full sm:w-[354px]'}`}>
       <div className='flex flex-col space-y-2'>
-        <div className='w-full h-48'>
+        <div className='w-full aspect-video rounded-lg overflow-hidden'>
           <img 
             alt='thumbnail' 
             src={thumbnails?.high?.url} 
-            className='w-full h-full rounded-lg object-cover'
+            className='w-full h-full object-cover rounded-lg'
           />
         </div>
         <div className='px-2'>

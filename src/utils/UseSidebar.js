@@ -4,10 +4,9 @@ import React, { createContext, useState } from 'react';
 export const SidebarContext = createContext();
 
 // Create a provider component
-// Getting children as a prop from the provider component
 export const SidebarProvider = ({ children }) => {
   // Create a state variable to track whether the sidebar is open or not
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Function to toggle the sidebar's open state
   const toggleSidebar = () => {
@@ -15,8 +14,8 @@ export const SidebarProvider = ({ children }) => {
   };
 
   return (
-    // The provider component makes the state and toggle function available to all its children
-    <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
+    // The provider component makes the state and functions available to all its children
+    <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar, setIsSidebarOpen }}>
       {children} {/* Render all the children passed to this provider */}
     </SidebarContext.Provider>
   );

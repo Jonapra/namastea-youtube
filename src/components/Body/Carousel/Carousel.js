@@ -36,7 +36,7 @@ const NavigationBar = () => {
     <div 
       className="bg-[#010000] flex items-center w-[100%] navigation-bar fixed py-4 "
       style={{ 
-        maxWidth: isSidebarOpen ? '1390px' : '1500px'
+        maxWidth: isSidebarOpen ? '1400px' : '1500px'
       }}
     >
       <button
