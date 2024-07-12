@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useState} from 'react';
 import { useLocation,useSearchParams } from 'react-router-dom';
 import {SidebarContext} from '../../utils/UseSidebar.js';
 import { useContext } from'react';
 import VideosContainer from './VideosContainer.js';
+import { YOUTUBE_VIDEO_API } from '../../utils/Constants.js';
 
 const WatchVideo = () => {
   const location = useLocation();
   const { setIsSidebarOpen } = useContext(SidebarContext);
   // search Params
   const [searchParams] = useSearchParams();
-  console.log('This is searchParams', searchParams.get('v'));
+  // console.log('This is searchParams', searchParams.get('v'));
 
 
   useEffect(() => {
@@ -20,9 +21,21 @@ const WatchVideo = () => {
     setIsSidebarOpen(false);
   }, [location.pathname]);
 
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    // Calling getVideos ()
+    getVideos();
+  }, []);
+
+  const getVideos = async () => {
+    const response = await fetch(YOUTUBE_VIDEO_API);
+    const data = await response.json();
+    setVideos(data.items);
+  };
+
   return (
     <div className='h-[100vh] bg-white '>
-      <VideosContainer/>
+      <VideosContainer data={videos} />
 
     </div>
   );

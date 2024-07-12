@@ -13,16 +13,20 @@ const MainContainer = () => {
 
   return (
     <div className='body-container flex bg-[#010000] mt-12'>
-      {/* Sidebar */}
+      {/* Sidebar hidden for smaller screens and for large screenblock */}
       <div className='sidebarSection fixed hidden lg:block'>
-        {isSidebarOpen ? <Sidebar /> : <SideMenu />}
+        {isSidebarOpen ? (
+          <Sidebar />
+        ) : (
+          searchParams.get('v') ? null : <SideMenu />
+        )}
       </div>
       {/* Main content section */}
-      {/* Added margin-left when sidebar is open */}
-      <div className={`contentSection w-full h-full bg-[#010000] ${isSidebarOpen ? 'lg:ml-44' : 'lg:ml-14'}`}>
+      {/* Added margin-left when sidebar is open for main body section */}
+      <div className={`contentSection w-full h-full bg-[#010000] ${isSidebarOpen && !searchParams.get('v')? 'lg:ml-44' : 'lg:ml-14'}`}>
         {/* if we have watch page it will show carousel  */}
         {!searchParams.get('v') && <Carousel />}
-        <div className=''>
+        <div className='child-container'>
           <Outlet /> {/* This is where child routes will be rendered */}
         </div>
       </div>

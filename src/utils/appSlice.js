@@ -4,6 +4,7 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     isMenuOpen : false,
+    watchvideoApi : {}
   },
   reducers:{
     toggleMenu: (state) => {
@@ -11,8 +12,8 @@ const appSlice = createSlice({
     },
     closeMenu: (state) => {
       state.isMenuOpen = false;
-    }
+    },
   }
 });
-export const { toggleMenu, closeMenu } = appSlice.actions;
+export const { toggleMenu, closeMenu,getWatchvideoApi } = appSlice.actions;
 export default appSlice.reducer;
