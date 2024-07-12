@@ -20,7 +20,7 @@ const Body = () => {
 
   return (
     <div className='videoSection w-full h-full bg-[#010000]'>
-      <div className='flex flex-wrap justify-between gap-5 px-4'>
+      <div className='flex flex-wrap justify-between gap-5 px-4 pt-16'>
         {videos.map(video => (
           <Link to={'/watch?v=' + video.id} key={video.id}>
             <Video info={video} />

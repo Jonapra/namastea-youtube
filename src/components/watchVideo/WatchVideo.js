@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useSearchParams } from 'react-router-dom';
 import {SidebarContext} from '../../utils/UseSidebar.js';
 import { useContext } from'react';
+import VideosContainer from './VideosContainer.js';
 
 const WatchVideo = () => {
   const location = useLocation();
   const { setIsSidebarOpen } = useContext(SidebarContext);
+  // search Params
+  const [searchParams] = useSearchParams();
+  console.log('This is searchParams', searchParams.get('v'));
 
 
   useEffect(() => {
@@ -17,8 +21,9 @@ const WatchVideo = () => {
   }, [location.pathname]);
 
   return (
-    <div>
-      <h1 className='text-white'>WnmkfdasnfsfbsAFafafa</h1>
+    <div className='h-[100vh] bg-white '>
+      <VideosContainer/>
+
     </div>
   );
 };
