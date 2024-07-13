@@ -5,7 +5,7 @@ import { Link } from'react-router-dom';
 const SideMenu = () => {
   return (
     // Hide the side menu on medium and smaller devices using Tailwind responsive classes
-    <div className="w-[72px] bg-[#0F0F0F] h-screen flex flex-col items-center pt-4 space-y-6 hidden md:flex lg:flex">
+    <div className="w-[72px] bg-[#010000] h-screen flex flex-col items-center pt-4 space-y-6 hidden md:flex lg:flex">
       <nav>
         <ul className="flex flex-col items-center space-y-5">
           <li>

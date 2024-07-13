@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Video from './VideoSection/Video';
+import Video, {Addcomp}from './VideoSection/Video';
 import { YOUTUBE_VIDEO_API } from '../../utils/Constants';
 import { Link } from'react-router-dom';
 
@@ -20,6 +20,8 @@ const Body = () => {
   
   return (
     <div className='videoSection w-full h-full bg-[#010000]'>
+      {/* HOF form video testing */}
+      {/* <Addcomp info={videos[0]} /> */}
       <div className='flex flex-wrap  justify-around  gap-4 px-4 pt-16'>
         {videos.map(video => (
           <Link to={'/watch?v=' + video.id} key={video.id}>

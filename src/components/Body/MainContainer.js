@@ -14,7 +14,7 @@ const MainContainer = () => {
   return (
     <div className='body-container flex bg-[#010000] mt-12'>
       {/* Sidebar hidden for smaller screens and for large screenblock */}
-      <div className='sidebarSection fixed hidden lg:block'>
+      <div className='sidebarSection fixed hidden lg:block z-50'>
         {isSidebarOpen ? (
           <Sidebar />
         ) : (

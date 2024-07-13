@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
+import Description from './Description';
 
 const formatNumber = (num) => {
   if (num >= 1000000) {
@@ -10,6 +11,29 @@ const formatNumber = (num) => {
   return num?.toString();
 };
 
+const getTimeDifference = (publishDate) => {
+  const now = new Date();
+  const published = new Date(publishDate);
+  const diffInSeconds = Math.floor((now - published) / 1000);
+  const diffInHours = Math.floor(diffInSeconds / 3600);
+  
+  if (diffInHours < 24) {
+    return `${diffInHours} hr${diffInHours !== 1 ? 's' : ''} ago`;
+  } else if (diffInHours < 168) { // 7 days
+    const days = Math.floor(diffInHours / 24);
+    return `${days} day${days !== 1 ? 's' : ''} ago`;
+  } else if (diffInHours < 720) { // 30 days
+    const weeks = Math.floor(diffInHours / 168);
+    return `${weeks} week${weeks !== 1 ? 's' : ''} ago`;
+  } else if (diffInHours < 8760) { // 365 days
+    const months = Math.floor(diffInHours / 720);
+    return `${months} month${months !== 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(diffInHours / 8760);
+    return `${years} year${years !== 1 ? 's' : ''} ago`;
+  }
+};
+
 const VideosContainer = ({ data }) => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get('v');
@@ -18,7 +42,7 @@ const VideosContainer = ({ data }) => {
   const { viewCount, likeCount, commentCount } = filterVideo[0]?.statistics || {};
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 max-w-[1012px] w-full bg-[#0f0f0f] text-white">
+    <div className=" mt-4 sm:px-6  max-w-[1012px] w-full bg-[#0f0f0f] text-white">
       <div className="relative w-full" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
         <iframe 
           className="absolute top-0 left-0 w-full h-full"
@@ -29,7 +53,7 @@ const VideosContainer = ({ data }) => {
         ></iframe>
       </div>
       
-      <div className="mt-4">
+      <div className="mt-4 px-4 ">
         <h1 className="text-xl font-bold mb-2">{title}</h1>
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -38,7 +62,7 @@ const VideosContainer = ({ data }) => {
             </div>
             <div>
               <p className="font-semibold">{channelTitle}</p>
-              <p className="text-sm text-gray-400">{publishedAt}</p>
+              <p className="text-sm text-gray-400">100k  subscribers</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
@@ -68,8 +92,11 @@ const VideosContainer = ({ data }) => {
       </div>
       
       <div className="bg-[#272727] p-4 rounded-lg mt-4">
-        <p className="text-sm text-gray-300">{formatNumber(viewCount)} views</p>
-        <p className="mt-2">{description}</p>
+        <div className='pulblish flex space-x-4'>
+          <p className="text-sm text-gray-300">{formatNumber(viewCount)} views</p>
+          <p className="text-sm text-gray-300">{getTimeDifference(publishedAt)}</p>
+        </div>
+        <div className="mt-2"><Description description={description} /></div>
       </div>
     </div>
   )

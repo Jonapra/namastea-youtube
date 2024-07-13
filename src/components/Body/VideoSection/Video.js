@@ -17,8 +17,8 @@ const Video = ({ info }) => {
   };
 
   const truncateTitle = (str, numWords) => {
-    const words = str.split(' ');
-    if (words.length > numWords) {
+    const words = str?.split(' ');
+    if (words?.length > numWords) {
       return words.slice(0, numWords).join(' ') + '...';
     }
     return str;
@@ -77,4 +77,12 @@ const Video = ({ info }) => {
   );
 };
 
+// Higher order component ->(It takes a existing component and return a modefied version ) taking this video card and adding border 
+export const Addcomp = ({info}) => {
+  return (
+    <div className='flex flex-wrap  justify-around  gap-4 px-4 pt-16 border-2 border-red-700'>
+          <Video info={info} />
+    </div>
+  );
+};
 export default Video;
