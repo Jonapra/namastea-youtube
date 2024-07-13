@@ -18,7 +18,7 @@ const MainContainer = () => {
         {isSidebarOpen ? (
           <Sidebar />
         ) : (
-          searchParams.get('v') ? null : <SideMenu />
+          <SideMenu />
         )}
       </div>
       {/* Main content section */}

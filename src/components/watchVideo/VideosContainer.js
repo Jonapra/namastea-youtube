@@ -1,21 +1,76 @@
 import React from 'react'
-import {useSearchParams } from'react-router-dom';
-import { useEffect,useState } from 'react';
-import { YOUTUBE_VIDEO_API } from '../../utils/Constants.js';
+import { useSearchParams } from 'react-router-dom';
 
+const formatNumber = (num) => {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1) + 'M';
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1) + 'K';
+  }
+  return num?.toString();
+};
 
-const VideosContainer = ({data}) => {
-   const [searchParams] = useSearchParams();
-  console.log('This is watch received data', data);
+const VideosContainer = ({ data }) => {
+  const [searchParams] = useSearchParams();
   const videoId = searchParams.get('v');
   const filterVideo = data.filter(video => video.id === videoId);
-  console.log('This is filter video', filterVideo);
+  const { channelTitle, title, publishedAt, description } = filterVideo[0]?.snippet || {};
+  const { viewCount, likeCount, commentCount } = filterVideo[0]?.statistics || {};
+
   return (
-    <div className='viewVideo-container'>
-       <div className='video-container'>
-           <iframe width="900" height="400" src={"https://www.youtube.com/embed/" + searchParams.get('v')} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
-       </div>
-     
+    <div className="px-4 sm:px-6 lg:px-8 max-w-[1012px] w-full bg-[#0f0f0f] text-white">
+      <div className="relative w-full" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
+        <iframe 
+          className="absolute top-0 left-0 w-full h-full"
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+      </div>
+      
+      <div className="mt-4">
+        <h1 className="text-xl font-bold mb-2">{title}</h1>
+        <div className="flex flex-wrap items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="w-10 h-10 rounded-full overflow-hidden">
+              <img src='https://yt3.ggpht.com/ugAmG9LeliJJoiyacIecdiq_ZgRNdmjCIohaN5x3QEOmWB9dNUsKuCU8ngLs3JUauHZ4-boVkA=s48-c-k-c0x00ffffff-no-rj' alt="Channel logo" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <p className="font-semibold">{channelTitle}</p>
+              <p className="text-sm text-gray-400">{publishedAt}</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+            <button className="bg-[#272727] hover:bg-[#3f3f3f] px-4 py-2 rounded-full text-sm flex items-center">
+              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+              </svg>
+              {formatNumber(likeCount)}
+            </button>
+            <button className="bg-[#272727] hover:bg-[#3f3f3f] px-4 py-2 rounded-full text-sm flex items-center">
+              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15 5.63 20.66 12 15 18.37V14h-1c-3.96 0-7.14 1-9.75 3.09 1.84-4.07 5.11-6.4 9.89-7.1l.86-.13V5.63M14 3v6C6.22 10.13 3.11 15.33 2 21c2.78-3.97 6.44-6 12-6v6l8-9-8-9z"/>
+              </svg>
+              Share
+            </button>
+            <button className="bg-[#272727] hover:bg-[#3f3f3f] px-4 py-2 rounded-full text-sm flex items-center">
+              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+              </svg>
+              Download
+            </button>
+            <button className="bg-[#272727] hover:bg-[#3f3f3f] px-4 py-2 rounded-full text-sm">
+              ...
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="bg-[#272727] p-4 rounded-lg mt-4">
+        <p className="text-sm text-gray-300">{formatNumber(viewCount)} views</p>
+        <p className="mt-2">{description}</p>
+      </div>
     </div>
   )
 }
