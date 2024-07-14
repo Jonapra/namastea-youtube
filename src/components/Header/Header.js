@@ -27,7 +27,7 @@ const Navbar = () => {
   useEffect(()=>{
     // Make a API call for every key stroke press
     // But if the difference between 2 API calls is less then < 200 ms then don't make another API call
-    const timer =setTimeout(()=>getSearchResults(), 200);
+    const timer =setTimeout(()=>getSearchResults(), 3000);
     // return the timer so that it gets cleared when the component unmounts(this is called even before re-render)
     return () => clearTimeout(timer);
   },[searchQuery])
@@ -49,14 +49,28 @@ const Navbar = () => {
             <YouTubeLogo className="text-white" />
           </a>
         </div>
-        <div className="hidden sm:flex flex-grow max-w-2xl mx-4">
-          <input type="text" placeholder="Search" className="w-full px-3 py-2 border border-gray-700 bg-black text-white rounded-l-full focus:outline-none focus:border-blue-500"
-           value={searchQuery}
-           onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          <button className="bg-gray-700 px-6 py-2 rounded-r-full border border-l-0 border-gray-700 hover:bg-gray-600">
-            <SearchIcon className="text-white" />
-          </button>
+        <div className="w-[600px]">
+           <div className='hidden sm:flex flex-grow max-w-2xl mx-4'> 
+              <input type="text" placeholder="Search" className="w-full px-3 py-2 border border-gray-700 bg-black text-white rounded-l-full focus:outline-none focus:border-blue-500"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              <button className="bg-gray-700 px-6 py-2 rounded-r-full border border-l-0 border-gray-700 hover:bg-gray-600">
+                <SearchIcon className="text-white" />
+              </button>
+           </div>
+           <div className='pl-4 mt-1 fixed'>
+              <ul className='text-white  px-3 py-3 flex flex-col bg-black w-[500px] rounded-lg '>
+                <l1 className='hover:bg-slate-600'>iphone</l1>
+                <l1 className='hover:bg-slate-600'>iphone x</l1>
+                <l1 className='hover:bg-slate-600'>iphone 11</l1>
+                <l1 className='hover:bg-slate-600'>iphone 12</l1>
+                <l1 className='hover:bg-slate-600'>iphone 13</l1>
+                <l1 className='hover:bg-slate-600'>iphone 13 pro</l1> 
+                <l1 className='hover:bg-slate-600'>iphone 14 pro</l1>
+                
+              </ul>
+           </div>
         </div>
         <div className="flex items-center">
           <button className="p-2 hover:bg-gray-700 rounded-full">
