@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
 import Description from './Description';
+import Comments from './Comments';
 
 const formatNumber = (num) => {
   if (num >= 1000000) {
@@ -97,6 +98,10 @@ const VideosContainer = ({ data }) => {
           <p className="text-sm text-gray-300">{getTimeDifference(publishedAt)}</p>
         </div>
         <div className="mt-2"><Description description={description} /></div>
+      </div>
+      <div className='comments-section'>
+        <h1 className='text-2xl'>{commentCount} Comments</h1>
+        <Comments/>
       </div>
     </div>
   )

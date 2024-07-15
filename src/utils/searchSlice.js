@@ -2,18 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const searchSlice = createSlice({
   name: 'search',
-  initialState: {},
+  initialState: [],
   reducers: {
     searchedResults: (state, action) => {
-      // const state = Object.assign(state, action.payload);
-      /*
-      Why {...state, ...action.payload} needs a return:
-      This creates a new object without modifying the original.
-      Without a return, this new object is created but then discarded.
-       */
-      const newObj = { ...state, ...action.payload };
-      return newObj; // we can directly return { ...state, ...action.payload }; as well
-      // console.log('This is state received', state);
+      const maxEntries = 10;
+      const stateEntries = Object.entries(state);
+      const newEntries = Object.entries(action.payload);
+      
+      let updatedEntries = [...stateEntries, ...newEntries];
+      
+      // If we have more than 5 entries, remove the oldest ones pop out the 1st entry one 
+      //This effectively removes the oldest entries from the top and retains only the latest 10 entries(keeps the last 10 entries).
+      if (updatedEntries.length > maxEntries) {
+        updatedEntries = updatedEntries.slice(-maxEntries);
+      }
+      
+      return Object.fromEntries(updatedEntries);
     },
   },
 });

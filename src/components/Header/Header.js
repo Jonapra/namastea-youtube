@@ -44,11 +44,12 @@ const Navbar = () => {
     // Make a API call for every key stroke press
     // But if the difference between 2 API calls is less then < 200 ms then don't make another API call
     const timer =setTimeout(()=>{
-      if(cacheSearch[searchQuery]){
-        setSuggestions(cacheSearch[searchQuery]);
-      }else{
-        getSearchResults();
-      }
+      // getting data from store state this is same as chacheSearch.searchQuery
+        if (cacheSearch[searchQuery]) {
+          setSuggestions(cacheSearch[searchQuery])
+        }else{
+          getSearchResults()
+        }
     }, 200);
     // return the timer so that it gets cleared when the component unmounts(this is called even before re-render)
     return () => clearTimeout(timer);
@@ -60,11 +61,9 @@ const Navbar = () => {
     const data = await response.json();
     console.log('This is data', data[1]);
     setSuggestions(data[1]);
-
-    //update 
+    // dispatch action -> to store data if i dont have it in my store 
     dispatch(searchedResults({
-      // this will pass a object as - {iphone: ["iphone 11", "iphone 14"]} Key->searchQuery: data[1]
-      [searchQuery]: data[1]
+      [searchQuery]:[data[1]]
     }))
   }
   return (
