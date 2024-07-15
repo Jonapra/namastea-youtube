@@ -4,7 +4,7 @@ import searchSlice from "./searchSlice";
 const store = configureStore({
     reducer:{   
         app: appSlice,
-        searchSlice: searchSlice,
+        search: searchSlice,
     }
 });
 export default store;

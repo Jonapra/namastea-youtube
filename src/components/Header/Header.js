@@ -2,7 +2,7 @@ import React, { useContext ,useState,useEffect} from 'react';
 import { SidebarContext } from '../../utils/UseSidebar';
 import { MenuIcon, YouTubeLogo, SearchIcon, VideoIcon, NotificationIcon } from '../../utils/Icons';
 import { YOUTUBE_SEARCH_API } from '../../utils/Constants';
-import {searchSlice,searchedKey} from '../../utils/searchSlice.js'
+import {searchedResults} from '../../utils/searchSlice.js'
 import { useDispatch, useSelector } from'react-redux';  
 
 const Navbar = () => {
@@ -12,11 +12,17 @@ const Navbar = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   console.log('This is API call searchQuery:', searchQuery);
 
-  console.log(searchQuery.length);
+  //Search Results from redux store initial state
+  const cacheSearch = useSelector(state => state.search);
+  /** Example
+  *searchCache = {
+  * "iphone": ["iphone 11", "iphone 14"]
+  * }
+  *searchQuery = iphone
+  */
+
   const dispatch = useDispatch();
-  if (searchQuery.length>0) {
-    dispatch(searchedKey(searchQuery));
-  }
+
   
 /** How it's working:
  * key - i
@@ -37,16 +43,29 @@ const Navbar = () => {
   useEffect(()=>{
     // Make a API call for every key stroke press
     // But if the difference between 2 API calls is less then < 200 ms then don't make another API call
-    const timer =setTimeout(()=>getSearchResults(), 200);
+    const timer =setTimeout(()=>{
+      if(cacheSearch[searchQuery]){
+        setSuggestions(cacheSearch[searchQuery]);
+      }else{
+        getSearchResults();
+      }
+    }, 200);
     // return the timer so that it gets cleared when the component unmounts(this is called even before re-render)
     return () => clearTimeout(timer);
   },[searchQuery])
+
 
   const getSearchResults = async() =>{
     const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const data = await response.json();
     console.log('This is data', data[1]);
     setSuggestions(data[1]);
+
+    //update 
+    dispatch(searchedResults({
+      // this will pass a object as - {iphone: ["iphone 11", "iphone 14"]} Key->searchQuery: data[1]
+      [searchQuery]: data[1]
+    }))
   }
   return (
     <div className='nav-container'>
