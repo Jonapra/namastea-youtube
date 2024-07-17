@@ -77,7 +77,7 @@ const CommentsDisplay = ({ data }) => {
             <div className="px-3">
                 {replies && replies.length > 0 && (
                     <div className="">
-                        <h3 className='font-bold'>Replied</h3>
+                        <h3 className='font-bold'>Replies</h3>
                     </div>
                 )}
                 <p className="font-bold">{name}</p>
