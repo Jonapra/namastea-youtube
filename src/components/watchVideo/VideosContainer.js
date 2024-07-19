@@ -2,6 +2,7 @@ import React from 'react'
 import { useSearchParams } from 'react-router-dom';
 import Description from './Description';
 import Comments from './Comments';
+import Chats from './Livechats/Chats.js';
 
 const formatNumber = (num) => {
   if (num >= 1000000) {
@@ -43,8 +44,9 @@ const VideosContainer = ({ data }) => {
   const { viewCount, likeCount, commentCount } = filterVideo[0]?.statistics || {};
 
   return (
-    <div className=" mt-4 sm:px-6  max-w-[1012px] w-full bg-[#0f0f0f] text-white">
-      <div className="relative w-full" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
+   <div className='Mian-watchContiner mt-9 flex flex-1 '>
+    <div className="sm:px-6  max-w-[1012px] w-full bg-[#0f0f0f] text-white">
+      <div className="relative w-full flex" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
         <iframe 
           className="absolute top-0 left-0 w-full h-full"
           src={`https://www.youtube.com/embed/${videoId}`}
@@ -63,7 +65,7 @@ const VideosContainer = ({ data }) => {
             </div>
             <div>
               <p className="font-semibold">{channelTitle}</p>
-              <p className="text-sm text-gray-400">100k  subscribers</p>
+              <p className="text-sm text-gray-400">{Math.floor(Math.random() * (40 - 9 + 1)) + 9}M  subscribers</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
@@ -99,11 +101,17 @@ const VideosContainer = ({ data }) => {
         </div>
         <div className="mt-2"><Description description={description} /></div>
       </div>
+      {/* Comments container */}
       <div className='comments-section'>
         <h1 className='text-2xl'>{commentCount} Comments</h1>
         <Comments/>
       </div>
     </div>
+    {/* Live Chats */}
+    <div className='liveChats-container ml-12 mt-3'>
+       <Chats/>
+    </div>
+  </div>
   )
 }
 

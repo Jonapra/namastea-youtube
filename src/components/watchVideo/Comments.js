@@ -65,7 +65,7 @@ const commentsData = [
 ];
 
 const CommentsDisplay = ({ data }) => {
-    console.log('This is data', data);
+    // console.log('This is data', data);
     const { name, text ,replies} = data;
     return (
         <div className="flex py-3 px-3 shadow-sm bg-gray-900 rounded-md">
