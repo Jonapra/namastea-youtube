@@ -103,7 +103,7 @@ const VideosContainer = ({ data }) => {
       </div>
       {/* Comments container */}
       <div className='comments-section'>
-        <h1 className='text-2xl'>{commentCount} Comments</h1>
+        <h1 className='text-2xl'>{commentCount} Comment</h1>
         <Comments/>
       </div>
     </div>
