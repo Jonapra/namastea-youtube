@@ -96,7 +96,7 @@ const Navbar = () => {
                   {/* displaying suggestions */}
                   {
                     suggestions.map((s)=>(
-                      <l1 key={s} className='hover:bg-slate-600'>{s}</l1>
+                      <l1 key={s} className='hover:bg-slate-600'>🔍 {s}</l1>
                     ))
                   }
                 </ul>
