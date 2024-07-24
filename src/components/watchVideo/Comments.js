@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 
 const commentsData = [
     {
@@ -68,31 +69,39 @@ const CommentsDisplay = ({ data }) => {
     // console.log('This is data', data);
     const { name, text ,replies} = data;
     return (
-        <div className="flex py-3 px-3 shadow-sm bg-gray-900 rounded-md">
-            <img
-                className="w-12 h-12"
-                alt="User"
-                src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-            />
-            <div className="px-3">
-                {replies && replies.length > 0 && (
-                    <div className="">
-                        <h3 className='font-bold'>Replies</h3>
-                    </div>
-                )}
-                <p className="font-bold">{name}</p>
-                <p>{text}</p>
+        <div className='flex justify-between'>
+            <div className="flex py-3 px-3 shadow-sm bg-[#0F0F0F] rounded-md">
+                <img
+                    className="w-12 h-12"
+                    alt="User"
+                    src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                />
+                <div className="px-3">
+                    <p className="font-bold">{name}</p>
+                    <p>{text}</p>
+                </div>
+                
             </div>
+            <button className='font-bold text-lg flex flex-row items-center '>. . .</button>
         </div>
     );
 };
 
 const CommentsList = ({ comments }) => {
+    const [repliesActive, setRepliesActive] = useState(false);
     return comments.map((item, index) => (
         <div key={index}>
             <CommentsDisplay data={item} />
-            {/* Using recursion and passing the data of replies (if there are replies it will pass the data to the CommentsList component same component  ->  <CommentsDisplay data={item} /> and render the JSX) */}
-            {item.replies && item.replies.length > 0 && (
+            {item?.replies?.length > 0 ? (
+                <button 
+                    className='cursor-pointer pl-8 text-blue-700' 
+                    onClick={() => setRepliesActive(prevState => !prevState)}
+                >
+                Replies 
+                </button>
+            ) : null}
+             {/* Using recursion and passing the data of replies (if there are replies it will pass the data to the CommentsList component same component  ->  <CommentsDisplay data={item} /> and render the JSX) */}
+            {repliesActive ===true && item.replies && item.replies.length > 0 &&   (
                 <div className='ml-9 border-l-2'>
                     <CommentsList comments={item.replies} />
                 </div>
