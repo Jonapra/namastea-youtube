@@ -9,6 +9,7 @@ import { createBrowserRouter ,RouterProvider} from "react-router-dom";
 import WatchVideo from './components/watchVideo/WatchVideo.js'
 import MainContainer  from "./components/Body/MainContainer.js";
 
+
 /*When the MainContainer component is loaded, it will include the sidebar and also render the Outlet component. The Outlet will initially load the Body component because the path / corresponds to Body in your router configuration.
 -The router configuration specifies that the default child route for / is the Body component.
 */
