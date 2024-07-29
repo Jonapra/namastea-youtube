@@ -16,7 +16,7 @@ const Chats = ({ messages }) => {
 
   return (
     <div className="liveChats-container border-2 border-black w-[401px] h-[595px] rounded-lg flex flex-col">
-      <h2 className="font-bold px-2 py-2 border-b-2 border-black text-lg">Top Chats</h2>
+      <h2 className="font-bold px-2 py-2 border-b-2 border-black text-lg">Top Chatss</h2>
       <div className="flex-1 overflow-y-auto p-2">
         {messages.map((msg, index) => (
           <ChatsMessage key={index} name={msg.name} message={msg.message} />
