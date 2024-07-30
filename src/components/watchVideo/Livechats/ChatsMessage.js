@@ -1,19 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const ChatsMessage = ({ name, message }) => {
+const ChatsMessage = () => {
+  const chats = useSelector(state => state.chat.messages);
+
   return (
-    <div className='flex items-start mt-2'>
-      <div className='sub-logo items-center justify-center pt-1'>
-        <button className="ml-2 w-5 h-5 rounded-full font-semibold bg-gray-400 text-gray-700 flex items-center justify-center">
-          A
-        </button>
-      </div>
-      <div className='ml-2'>
-        <span className='font-bold  text-[#9C97A2]'>{name}</span>
-        {/* The span with ml-1 break-words ensures that the message wraps under the name if it gets too long. */}
-        <span className='ml-1 font-semibold'>{message}</span>
-      </div>
-    </div>
+    <>
+      {chats.map((chat, index) => (
+        <div key={index} className="flex items-start p-2">
+          <div className="flex-shrink-0">
+            <button className="w-6 h-6 rounded-full font-semibold bg-gray-400 text-gray-700 flex items-center justify-center">
+              A
+            </button>
+          </div>
+          <div className="ml-2 flex-grow">
+            <span className="font-bold text-[#9C97A2]">{chat.name}</span>
+            <span className="ml-1 font-semibold break-words">{chat.message}</span>
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
 
