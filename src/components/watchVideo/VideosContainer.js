@@ -44,7 +44,7 @@ const VideosContainer = ({ data }) => {
   const { viewCount, likeCount, commentCount } = filterVideo[0]?.statistics || {};
 
   return (
-   <div className='Mian-watchContiner mt-9 flex flex-1 '>
+   <div className='Mian-watchContiner mt-9 flex flex-1 bg-[#0f0f0f]'>
     <div className="sm:px-6  max-w-[1012px] w-full bg-[#0f0f0f] text-white">
       <div className="relative w-full flex" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
         <iframe 
