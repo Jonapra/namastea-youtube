@@ -15,7 +15,7 @@ const ChatsMessage = () => {
             </div>
           </div>
           <div className="ml-2 flex-grow">
-            <span className="font-bold text-[#9C97A2] text-white">{chat.name}</span>
+            <span className="font-bold text-[#9C97A2]">{chat.name}</span>
             <span className="ml-1 font-semibold break-words text-white">{chat.message}</span>
           </div>
         </div>
