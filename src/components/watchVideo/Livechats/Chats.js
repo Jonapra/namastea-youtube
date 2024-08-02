@@ -19,7 +19,7 @@ const Chats = () => {
   }, [dispatch]);
 
   return (
-    <div className="liveChats-container border-[2px] border-[#222222] w-[401px] h-[595px] rounded-lg flex flex-col">
+    <div className="liveChats-container border-[2px] border-[#222222] w-full lg:w-[401px] h-[595px] rounded-lg flex flex-col">
       <h2 className="font-bold px-2 py-2 border-b-[3px] border-[#222222] text-white text-lg">Top Chats</h2>
       
       {/* Added flex-col-reverse to reverse the order of the chats messages. It is a flexbox feature that allows you to reverse the order of the flex items. */}

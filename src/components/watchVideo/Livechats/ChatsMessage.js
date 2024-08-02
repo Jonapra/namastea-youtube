@@ -8,7 +8,7 @@ const ChatsMessage = () => {
   return (
     <>
       {chats.map((chat, index) => (
-        <div key={index} className="flex items-start p-2">
+        <div key={index} className="flex items-start p-2 lg:pr-8 ">
           <div className="flex-shrink-0">
             <div className="w-6 h-6 rounded-full font-semibold bg-gray-400 text-gray-700 flex items-center justify-center">
               <IoPerson />

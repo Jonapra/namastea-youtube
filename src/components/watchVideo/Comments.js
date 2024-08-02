@@ -102,7 +102,7 @@ const CommentsList = ({ comments }) => {
             ) : null}
              {/* Using recursion and passing the data of replies (if there are replies it will pass the data to the CommentsList component same component  ->  <CommentsDisplay data={item} /> and render the JSX) */}
             {repliesActive ===true && item.replies && item.replies.length > 0 &&   (
-                <div className='ml-9 border-l-2'>
+                <div className="ml-9 border-l-2 sm:block hidden">
                     <CommentsList comments={item.replies} />
                 </div>
             )}

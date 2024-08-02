@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Description from './Description';
 import Comments from './Comments';
 import Chats from './Livechats/Chats.js';
+import { MdOutlineSubscriptions } from "react-icons/md";
 
 const formatNumber = (num) => {
   if (num >= 1000000) {
@@ -60,8 +61,8 @@ const VideosContainer = ({ data }) => {
         <h1 className="text-xl font-bold mb-2">{title}</h1>
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 rounded-full overflow-hidden">
-              <img src='https://yt3.ggpht.com/ugAmG9LeliJJoiyacIecdiq_ZgRNdmjCIohaN5x3QEOmWB9dNUsKuCU8ngLs3JUauHZ4-boVkA=s48-c-k-c0x00ffffff-no-rj' alt="Channel logo" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+              <MdOutlineSubscriptions />
             </div>
             <div>
               <p className="font-semibold">{channelTitle}</p>
@@ -94,21 +95,26 @@ const VideosContainer = ({ data }) => {
         </div>
       </div>
       
+        {/* Live Chats */}
+        <div className='liveChats-container mt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden'>
+          <Chats/>
+        </div>
       <div className="bg-[#272727] p-4 rounded-lg mt-4">
         <div className='pulblish flex space-x-4'>
           <p className="text-sm text-gray-300">{formatNumber(viewCount)} views</p>
           <p className="text-sm text-gray-300">{getTimeDifference(publishedAt)}</p>
         </div>
-        <div className="mt-2"><Description description={description} /></div>
+        <div className="mt-2 "><Description description={description} /></div>
       </div>
+     
       {/* Comments container */}
-      <div className='comments-section'>
+      <div className='comments-section '>
         <h1 className='text-2xl'>{commentCount} Comments</h1>
         <Comments/>
       </div>
     </div>
     {/* Live Chats */}
-    <div className='liveChats-container ml-12 mt-3'>
+    <div className='liveChats-container ml-12 mt-3 hidden lg:flex'>
        <Chats/>
     </div>
   </div>
