@@ -66,7 +66,7 @@ const VideosContainer = ({ data }) => {
             </div>
             <div>
               <p className="font-semibold">{channelTitle}</p>
-              <p className="text-sm text-gray-400">{Math.floor(Math.random() * (40 - 9 + 1)) + 9}M  subscribers</p>
+              <p className="text-sm text-gray-400">{Math.floor(Math.random() * (40 - 9 + 1)) + 9}M  Subscribers</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
