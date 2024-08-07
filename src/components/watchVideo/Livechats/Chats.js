@@ -48,7 +48,7 @@ const Chats = () => {
           type="submit"
           className='flex justify-center align-middle items-center pl-3 cursor-pointer '
         >
-          <FaArrowRight  className="text-white"/>
+          <FaArrowRight  className="submitBtn text-white"/>
         </button>
       </form>
       

@@ -67,7 +67,7 @@ const commentsData = [
 
 const CommentsDisplay = ({ data }) => {
     // console.log('This is data', data);
-    const { name, text ,replies} = data;
+    const { name, text } = data;
     return (
         <div className='flex justify-between'>
             <div className="flex py-3 px-3 shadow-sm bg-[#0F0F0F] rounded-md">
