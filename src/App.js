@@ -8,6 +8,7 @@ import store from "./utils/store.js";
 import { createBrowserRouter ,RouterProvider} from "react-router-dom";
 import WatchVideo from './components/watchVideo/WatchVideo.js'
 import MainContainer  from "./components/Body/MainContainer.js";
+import Hooks from './components/Hooks/Hooks.js'
 
 
 /*When the MainContainer component is loaded, it will include the sidebar and also render the Outlet component. The Outlet will initially load the Body component because the path / corresponds to Body in your router configuration.
@@ -27,6 +28,10 @@ const appRouter = createBrowserRouter([
         path: 'watch',
         element: <WatchVideo />, // Watch video path
       },
+      {
+        path: 'hooks',
+        element: <Hooks/>, 
+      }
     ],
   },
 ]);
