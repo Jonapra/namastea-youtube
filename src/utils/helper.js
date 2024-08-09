@@ -44,6 +44,8 @@ function isPrime(num) {
   }
   
   function nthPrime(n) {
+    console.log('calculating the prime number:', n);
+    
       if (n < 1) return null; // Invalid input
   
       let count = 0;
