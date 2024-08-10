@@ -15,7 +15,7 @@ const Hooks = () => {
         <div className={'inputBox border-2 border-black w-[400px] h-[400px] pt-3 pl-2 rounded-lg ' + (dark && 'bg-black text-white')}>
             <button className='border-2 rounded-lg border-red-800 px-4 py-1 bg-green-500' onClick={()=>setDark(!dark)}>Dark</button>
             <input type="number" className={'mt-2 border-2 border-black w-[360px] h-[40px]' + (dark && 'text-white bg-black')}
-            placeholder='Enter text'
+            placeholder='Enter Number'
             value={input}   
             onChange={(e)=>setInput(e.target.value)}/>
             <div>
