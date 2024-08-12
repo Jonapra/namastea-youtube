@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef ,useState} from 'react';
 
 const RefsDemo = () => {
@@ -7,11 +7,14 @@ const RefsDemo = () => {
     // we can access the ref object using ref.current we get like this -{current: 10}
     const ref = useRef(10); //(10 is the initial value of ref)
     // console.log('Ref :',ref); 
-
-
-
-
     
+    const inputRef = useRef(null);
+    
+    const handleButtonClick = () => {
+        inputRef.current.focus(); // Focus the input field
+        console.log('Reference :',inputRef);
+    };
+
   return (
     <div className='p-2 bg-slate-50 border-2 ☐ border-black w-96 h-96 flex flex-col'>
         <span className='text-lg font-bold'>Normal Variable X = {x}</span>
@@ -41,13 +44,12 @@ const RefsDemo = () => {
             useRef
         </button>
 
-        <button className='px-3 py-2 bg-red-900  w-32 mt-9 text-white rounded-md'
-        onClick={() => {
-            
-            
-        }}>
-            Stop interval
-        </button>
+        <div>
+            <input ref={inputRef} type="text" placeholder="Focus on me!" className="border p-2" />
+            <button onClick={handleButtonClick} className="mt-2 p-2 bg-blue-500 text-white">
+                Focus Input
+            </button>
+        </div>
 
     </div>
   )
