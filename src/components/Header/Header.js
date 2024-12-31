@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { SidebarContext } from '../../utils/UseSidebar';
 import { MenuIcon, YouTubeLogo, SearchIcon, VideoIcon, NotificationIcon} from '../../utils/Icons';
@@ -15,6 +15,7 @@ const Navbar = () => {
   
   const [showSuggestions, setShowSuggestions] = useState(false);
   // console.log('This is API call searchQuery:', searchQuery);
+  const searchRef = useRef(null);
 
   //Search Results from redux store initial state
   const cacheSearch = useSelector(state => state.search);
@@ -44,37 +45,53 @@ const Navbar = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (cacheSearch[searchQuery]) {
-        setSuggestions(cacheSearch[searchQuery]);
-      } else {
-        getSearchResults();
+      if (searchQuery.length > 0) {
+        if (cacheSearch[searchQuery]) {
+          setSuggestions(cacheSearch[searchQuery]);
+        } else {
+          getSearchResults();
+        }
       }
     }, 200);
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  const getSearchResults = async () => {
-    const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-    const data = await response.json();
-    
-    const suggestions = Array.isArray(data[1]) ? data[1] : [data[1]];
-    setSuggestions(suggestions);
-    
-    dispatch(searchedResults({
-      [searchQuery]: suggestions
-    }));
-  }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
 
-  // Handle suggestion click
-  const handleSuggestionClick = (suggestion) => {
-    setSearchQuery(suggestion);
-    setShowSuggestions(false);
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside, { passive: true });
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
+  const getSearchResults = async () => {
+    try {
+      const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+      const data = await response.json();
+      const suggestions = Array.isArray(data[1]) ? data[1] : [data[1]];
+      setSuggestions(suggestions);
+      dispatch(searchedResults({
+        [searchQuery]: suggestions
+      }));
+    } catch (error) {
+      console.error('Search error:', error);
+      setSuggestions([]);
+    }
   };
 
-  // Handle touch events for mobile
-  const handleTouchStart = (e) => {
-    e.preventDefault();
-    setShowSuggestions(true);
+  const handleSuggestionClick = (suggestion, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
   };
 
   return (
@@ -84,15 +101,18 @@ const Navbar = () => {
           <button className="p-2 hover:bg-gray-700 rounded-full hidden lg:block" onClick={toggleSidebar}>
             <MenuIcon className="text-white" />
           </button>
-          <a href="/" className={`${searchActive === true ? "hidden" : "flex"} ml-4 flex items-center`}>
+          <a href="/" className={`${searchActive ? "hidden" : "flex"} ml-4 flex items-center`}>
             <YouTubeLogo className="text-white" />
           </a>
         </div>
-        <div className="w-full max-w-[600px] relative">
-          <div className={`${searchActive === true ? "flex" : "hidden"} sm:flex flex-grow max-w-2xl mx-4`}>
+        <div className="w-full max-w-[600px] relative" ref={searchRef}>
+          <div className={`${searchActive ? "flex" : "hidden"} sm:flex flex-grow max-w-2xl mx-4`}>
             {searchActive && (
               <button
-                onClick={() => setSearchActive(false)}
+                onClick={() => {
+                  setSearchActive(false);
+                  setShowSuggestions(false);
+                }}
                 className="mr-2 bg-transparent text-white hover:text-gray-400"
               >
                 <IoArrowBackOutline className="w-6 h-6" />
@@ -103,9 +123,11 @@ const Navbar = () => {
               placeholder="Search"
               className="w-full px-3 py-2 border border-gray-700 bg-black text-white rounded-l-full focus:outline-none focus:border-blue-500"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setShowSuggestions(true)}
-              onTouchStart={handleTouchStart}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setShowSuggestions(e.target.value.length > 0);
+              }}
+              onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
             />
             <button className="bg-gray-700 px-2 sm:px-6 py-0 sm:py-2 rounded-r-full border border-l-0 border-gray-700 hover:bg-gray-600">
               <SearchIcon className="text-white" />
@@ -117,12 +139,8 @@ const Navbar = () => {
                 {suggestions.map((s) => (
                   <li 
                     key={s} 
-                    className='px-4 py-2 hover:bg-slate-600 flex items-center cursor-pointer'
-                    onClick={() => handleSuggestionClick(s)}
-                    onTouchStart={(e) => {
-                      e.preventDefault();
-                      handleSuggestionClick(s);
-                    }}
+                    className='px-4 py-3 hover:bg-slate-600 active:bg-slate-700 flex items-center cursor-pointer'
+                    onClick={(e) => handleSuggestionClick(s, e)}
                   >
                     🔍 <span className='ml-2 break-words'>{s}</span>
                   </li>
@@ -132,7 +150,7 @@ const Navbar = () => {
           )}
         </div>
         <button 
-          className={`${searchActive === true ? 'hidden' : 'block'} lg:hidden`} 
+          className={`${searchActive ? 'hidden' : 'block'} lg:hidden`} 
           onClick={() => setSearchActive(true)}
         >
           <SearchIcon className="text-white w-6 h-6" />
