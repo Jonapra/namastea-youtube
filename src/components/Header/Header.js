@@ -10,7 +10,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  console.log('This is API call searchQuery:', searchQuery);
+  // console.log('This is API call searchQuery:', searchQuery);
 
   //Search Results from redux store initial state
   const cacheSearch = useSelector(state => state.search);

@@ -15,7 +15,7 @@ const Body = () => {
     const response = await fetch(YOUTUBE_VIDEO_API);
     const data = await response.json();
     setVideos(data?.items);
-    console.log('This is data', data);
+    // console.log('This is data', data);
   };
   
   return (
