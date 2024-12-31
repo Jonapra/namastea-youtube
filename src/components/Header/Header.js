@@ -2,9 +2,12 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { SidebarContext } from '../../utils/UseSidebar';
 import { MenuIcon, YouTubeLogo, SearchIcon, VideoIcon, NotificationIcon} from '../../utils/Icons';
-import { YOUTUBE_SEARCH_API } from '../../utils/Constants';
 import { searchedResults } from '../../utils/searchSlice.js'
 import { useDispatch, useSelector } from 'react-redux';  
+
+const DUMMY_SUGGESTIONS = {
+  "iphone": ["iphone 15 pro max", "iphone 14 price", "iphone 13 review", "iphone cases", "iphone wallpaper"]
+};
 
 const Navbar = () => {
   const { toggleSidebar } = useContext(SidebarContext);
@@ -46,50 +49,27 @@ const Navbar = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchQuery.length > 0) {
-        if (cacheSearch[searchQuery]) {
-          setSuggestions(cacheSearch[searchQuery]);
-        } else {
-          getSearchResults();
-        }
+        getDummyResults();
+      } else {
+        setSuggestions([]);
       }
     }, 200);
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside, { passive: true });
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, []);
-
-  const getSearchResults = async () => {
-    try {
-      const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-      const data = await response.json();
-      const suggestions = Array.isArray(data[1]) ? data[1] : [data[1]];
-      setSuggestions(suggestions);
+  const getDummyResults = () => {
+    const query = searchQuery.toLowerCase();
+    if (query.includes('iphone')) {
+      setSuggestions(DUMMY_SUGGESTIONS.iphone);
       dispatch(searchedResults({
-        [searchQuery]: suggestions
+        [query]: DUMMY_SUGGESTIONS.iphone
       }));
-    } catch (error) {
-      console.error('Search error:', error);
+    } else {
       setSuggestions([]);
     }
   };
 
-  const handleSuggestionClick = (suggestion, event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleSuggestionClick = (suggestion) => {
     setSearchQuery(suggestion);
     setShowSuggestions(false);
   };
@@ -140,7 +120,7 @@ const Navbar = () => {
                   <li 
                     key={s} 
                     className='px-4 py-3 hover:bg-slate-600 active:bg-slate-700 flex items-center cursor-pointer'
-                    onClick={(e) => handleSuggestionClick(s, e)}
+                    onClick={() => handleSuggestionClick(s)}
                   >
                     🔍 <span className='ml-2 break-words'>{s}</span>
                   </li>
