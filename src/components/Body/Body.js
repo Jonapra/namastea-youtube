@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Video, {Addcomp}from './VideoSection/Video';
+import Video from './VideoSection/Video';
 import { YOUTUBE_VIDEO_API } from '../../utils/Constants';
 import { Link } from'react-router-dom';
 

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { IoArrowBackOutline } from "react-icons/io5";
 import { SidebarContext } from '../../utils/UseSidebar';
-import { MenuIcon, YouTubeLogo, SearchIcon, VideoIcon, NotificationIcon } from '../../utils/Icons';
+import { MenuIcon, YouTubeLogo, SearchIcon, VideoIcon, NotificationIcon} from '../../utils/Icons';
 import { YOUTUBE_SEARCH_API } from '../../utils/Constants';
 import { searchedResults } from '../../utils/searchSlice.js'
 import { useDispatch, useSelector } from 'react-redux';  
@@ -9,6 +10,9 @@ const Navbar = () => {
   const { toggleSidebar } = useContext(SidebarContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [searchActive, setSearchActive] = useState(false);
+  // console.log('This is search button acti', searchActive);
+  
   const [showSuggestions, setShowSuggestions] = useState(false);
   // console.log('This is API call searchQuery:', searchQuery);
 
@@ -60,7 +64,7 @@ const Navbar = () => {
   const getSearchResults = async () => {
     const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const data = await response.json();
-    console.log('This is data', data[1]);
+    // console.log('This is data', data[1]);
     
     // Ensure API results are stored consistently
     /*It checks if data[1] is an array using Array.isArray().
@@ -78,24 +82,32 @@ const Navbar = () => {
 
   return (
     <div className='nav-container'>
-      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between bg-black px-4 py-2 z-50">
+      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between bg-black px-4 sm:py-2 md:py-2 py-3 z-50">
         <div className="flex items-center">
           {/* Menu button for medium and larger screens only else its hidden */}
           <button className="p-2 hover:bg-gray-700 rounded-full hidden lg:block" onClick={toggleSidebar}>
             <MenuIcon className="text-white" />
           </button>
-          <a href="/" className="ml-4 flex items-center">
+          <a href="/" className={`${searchActive === true ? "hidden" : "flex"} ml-4 flex items-center`}>
             <YouTubeLogo className="text-white" />
           </a>
         </div>
         <div className="w-[600px]">
-           <div className='hidden sm:flex flex-grow max-w-2xl mx-4'> 
+          <div className={`${searchActive === true ? "flex" : "hidden"} sm:flex flex-grow max-w-2xl mx-4`}>
+          {searchActive && (
+            <button
+              onClick={() => setSearchActive(false)}
+              className="mr-2 bg-transparent text-white hover:text-gray-400"
+            >
+              <IoArrowBackOutline  className="w-6 h-6" /> {/* Replace `MenuIcon` with the correct back arrow icon */}
+            </button>
+          )}
               <input type="text" placeholder="Search" className="w-full px-3 py-2 border border-gray-700 bg-black text-white rounded-l-full focus:outline-none focus:border-blue-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value )}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setShowSuggestions(false)}/>
-              <button className="bg-gray-700 px-6 py-2 rounded-r-full border border-l-0 border-gray-700 hover:bg-gray-600">
+              <button className="bg-gray-700 px-2 sm:px-6 py-0 sm:py-2 rounded-r-full border border-l-0 border-gray-700 hover:bg-gray-600">
                 <SearchIcon className="text-white" />
               </button>
            </div>
@@ -113,7 +125,11 @@ const Navbar = () => {
             )
            }
         </div>
-        <div className="flex items-center">
+        <button className={`${searchActive === true ?'hidden':'block'} lg:hidden`} onClick={() => setSearchActive(true)}>
+          <SearchIcon className="text-white w-6 h-6" />
+        </button>
+
+        <div className="hidden lg:flex items-center">
           <button className="p-2 hover:bg-gray-700 rounded-full">
             <VideoIcon className="text-white" />
           </button>

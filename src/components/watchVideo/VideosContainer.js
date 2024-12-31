@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import Description from './Description';
 import Comments from './Comments';
 import Chats from './Livechats/Chats.js';
@@ -13,6 +14,7 @@ const formatNumber = (num) => {
   }
   return num?.toString();
 };
+
 
 const getTimeDifference = (publishDate) => {
   const now = new Date();
@@ -43,6 +45,12 @@ const VideosContainer = ({ data }) => {
   const filterVideo = data.filter(video => video.id === videoId);
   const { channelTitle, title, publishedAt, description } = filterVideo[0]?.snippet || {};
   const { viewCount, likeCount, commentCount } = filterVideo[0]?.statistics || {};
+
+  useEffect(() => {
+    // Scroll to top when component is mounted
+    window.scrollTo(0, 0);
+  }, []);
+
 
   return (
    <div className='Mian-watchContiner mt-9 flex flex-1 bg-[#0f0f0f]'>
