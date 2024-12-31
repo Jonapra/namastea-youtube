@@ -99,7 +99,7 @@ const Navbar = () => {
               onClick={() => setSearchActive(false)}
               className="mr-2 bg-transparent text-white hover:text-gray-400"
             >
-              <IoArrowBackOutline  className="w-6 h-6" /> {/* Replace `MenuIcon` with the correct back arrow icon */}
+              <IoArrowBackOutline  className="w-6 h-6" /> 
             </button>
           )}
               <input type="text" placeholder="Search" className="w-full px-3 py-2 border border-gray-700 bg-black text-white rounded-l-full focus:outline-none focus:border-blue-500"
